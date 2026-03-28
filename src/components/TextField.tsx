@@ -1,6 +1,6 @@
 import type { TextInputProps } from "react-native";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { useAppTheme } from "@shared/theme/useAppTheme";
+import { useAppTheme } from "@core/theme";
 
 type TextFieldProps = TextInputProps & {
   label: string;
@@ -19,11 +19,13 @@ export const TextField = ({ label, errorMessage, ...props }: TextFieldProps) => 
           styles.input,
           { color: theme.colors.text, borderColor: theme.colors.border }
         ]}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor={theme.colors.placeholder}
       />
       {errorMessage ? (
         // We show a tiny red hint if the field is not valid.
-        <Text style={styles.errorText}>{errorMessage}</Text>
+        <Text style={[styles.errorText, { color: theme.colors.danger }]}>
+          {errorMessage}
+        </Text>
       ) : null}
     </View>
   );
@@ -46,7 +48,6 @@ const styles = StyleSheet.create({
   },
   errorText: {
     marginTop: 4,
-    color: "#DC2626",
     fontSize: 12
   }
 });

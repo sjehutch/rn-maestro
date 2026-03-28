@@ -1,13 +1,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { z } from "zod";
 import { Button } from "@components/Button";
+import { useAppTheme } from "@core/theme";
 import { TextField } from "@components/TextField";
 import { useLogin } from "@features/auth/hooks/useLogin";
 import { logger } from "@shared/logger/logger";
-import { useAppTheme } from "@shared/theme/useAppTheme";
 
 const loginSchema = z.object({
   userName: z.string().min(1, "Username is required"),
@@ -38,60 +38,111 @@ export const LoginScreen = () => {
   });
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}
+    <ScrollView
+      contentContainerStyle={[
+        styles.container,
+        { backgroundColor: theme.colors.background }
+      ]}
+      keyboardShouldPersistTaps="handled"
     >
-      <Text style={[styles.title, { color: theme.colors.text }]}>Login</Text>
+      <View style={styles.formShell}>
+        <View style={styles.headerBlock}>
+          <Text style={[styles.title, { color: theme.colors.text }]}>
+            Welcome back
+          </Text>
+          <Text style={[styles.subtitle, { color: theme.colors.text }]}>
+            Sign in to continue.
+          </Text>
+        </View>
 
-      <Controller
-        control={control}
-        name="userName"
-        render={({ field: { onChange, value: fieldValue }, fieldState }) => (
-          <TextField
-            label="Username"
-            value={fieldValue}
-            onChangeText={onChange}
-            autoCapitalize="none"
-            errorMessage={fieldState.error?.message}
+        <View
+          style={[
+            styles.formCard,
+            {
+              backgroundColor: theme.colors.card,
+              borderColor: theme.colors.border
+            }
+          ]}
+        >
+          <Controller
+            control={control}
+            name="userName"
+            render={({ field: { onChange, value: fieldValue }, fieldState }) => (
+              <TextField
+                label="Username"
+                value={fieldValue}
+                onChangeText={onChange}
+                autoCapitalize="none"
+                errorMessage={fieldState.error?.message}
+              />
+            )}
           />
-        )}
-      />
 
-      <Controller
-        control={control}
-        name="password"
-        render={({ field: { onChange, value: fieldValue }, fieldState }) => (
-          <TextField
-            label="Password"
-            value={fieldValue}
-            onChangeText={onChange}
-            secureTextEntry
-            errorMessage={fieldState.error?.message}
+          <Controller
+            control={control}
+            name="password"
+            render={({ field: { onChange, value: fieldValue }, fieldState }) => (
+              <TextField
+                label="Password"
+                value={fieldValue}
+                onChangeText={onChange}
+                secureTextEntry
+                errorMessage={fieldState.error?.message}
+              />
+            )}
           />
-        )}
-      />
 
-      {error ? (
-        <Text style={styles.errorText}>Login failed. Try again.</Text>
-      ) : null}
+          {error ? (
+            <Text style={[styles.errorText, { color: theme.colors.danger }]}>
+              Login failed. Try again.
+            </Text>
+          ) : null}
 
-      <Button title="Sign In" onPress={onSubmit} loading={isPending} />
-    </View>
+          <Button
+            title="Sign In"
+            onPress={() => {
+              void onSubmit();
+            }}
+            loading={isPending}
+          />
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     padding: 20,
-    justifyContent: "center"
+    paddingTop: 32,
+    paddingBottom: 32
+  },
+  formShell: {
+    width: "100%",
+    maxWidth: 420,
+    alignSelf: "center",
+    gap: 24
+  },
+  headerBlock: {
+    gap: 8
+  },
+  formCard: {
+    padding: 20,
+    borderRadius: 16,
+    borderWidth: 1
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: "700",
-    marginBottom: 16
+    lineHeight: 36
+  },
+  subtitle: {
+    fontSize: 16,
+    lineHeight: 22,
+    opacity: 0.7
   },
   errorText: {
-    color: "#DC2626",
     marginBottom: 12
   }
 });

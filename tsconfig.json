@@ -21,11 +21,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@app/*": ["src/app/*"],
+      "@core/*": ["src/core/*"],
       "@features/*": ["src/features/*"],
       "@components/*": ["src/components/*"],
       "@shared/*": ["src/shared/*"]
     }
   },
-  "include": ["src", "index.js"],
+  "include": ["src", "app", "index.js"],
   "exclude": ["node_modules"]
 }

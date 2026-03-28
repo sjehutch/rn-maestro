@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "expo start",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "eslint src app --max-warnings 0",
+    "lint:fix": "eslint src app --fix",
     "maestro:test": "./scripts/maestro.sh",
+    "expo:upgrade": "./scripts/upgrade-expo-sdk.sh",
     "typecheck": "tsc --noEmit",
     "android": "expo run:android",
     "ios": "expo run:ios"
@@ -33,15 +34,18 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.9.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "@types/react": "^18.2.67",
     "babel-plugin-module-resolver": "^5.0.0",
-    "eslint": "^9.9.0",
+    "eslint": "^8.57.1",
     "eslint-config-expo": "^7.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-unused-imports": "^4.3.0",
     "globals": "^15.9.0",
     "typescript": "^5.5.4",
-    "typescript-eslint": "^8.0.0"
+    "typescript-eslint": "^7.18.0"
   }
 }

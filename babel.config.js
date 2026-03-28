@@ -10,6 +10,7 @@ module.exports = function (api) {
           alias: {
             "@": "./src",
             "@app": "./src/app",
+            "@core": "./src/core",
             "@features": "./src/features",
             "@components": "./src/components",
             "@shared": "./src/shared"

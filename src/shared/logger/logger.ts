@@ -58,12 +58,16 @@ const logWithLevel = (
 };
 
 export const logger = {
-  debug: (message: string, meta?: Record<string, unknown>) =>
-    logWithLevel("debug", message, meta),
-  info: (message: string, meta?: Record<string, unknown>) =>
-    logWithLevel("info", message, meta),
-  warn: (message: string, meta?: Record<string, unknown>) =>
-    logWithLevel("warn", message, meta),
-  error: (message: string, meta?: Record<string, unknown>) =>
-    logWithLevel("error", message, meta)
+  debug: (message: string, meta?: Record<string, unknown>) => {
+    logWithLevel("debug", message, meta);
+  },
+  info: (message: string, meta?: Record<string, unknown>) => {
+    logWithLevel("info", message, meta);
+  },
+  warn: (message: string, meta?: Record<string, unknown>) => {
+    logWithLevel("warn", message, meta);
+  },
+  error: (message: string, meta?: Record<string, unknown>) => {
+    logWithLevel("error", message, meta);
+  }
 };

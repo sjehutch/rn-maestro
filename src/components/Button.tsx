@@ -1,4 +1,4 @@
-import { useAppTheme } from "@shared/theme/useAppTheme";
+import { useAppTheme } from "@core/theme";
 import type { GestureResponderEvent } from "react-native";
 import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 

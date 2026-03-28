@@ -12,7 +12,14 @@ module.exports = [
   js.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   {
-    ignores: ["node_modules/**", "dist/**", "build/**"],
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "build/**",
+      "eslint.config.cjs",
+      "babel.config.js",
+      "index.js"
+    ],
   },
   {
     files: ["**/*.{ts,tsx}"],
@@ -66,9 +73,10 @@ module.exports = [
     }
   },
   {
-    files: ["src/app/**/*.{ts,tsx}"],
+    files: ["src/app/**/*.{ts,tsx}", "app/**/*.{ts,tsx}"],
     rules: {
-      "import/no-default-export": "off"
+      "import/no-default-export": "off",
+      "no-restricted-imports": "off"
     }
   },
   {
